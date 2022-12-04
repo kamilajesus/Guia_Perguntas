@@ -21,7 +21,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.render("index");
+    Pergunta.findAll({ raw: true }).then(perguntas => {
+        res.render("index", {
+            perguntas: perguntas
+        });
+    }); 
 });
 
 app.get("/perguntar", (req, res) => {
